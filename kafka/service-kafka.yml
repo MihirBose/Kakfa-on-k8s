@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: kafka
+  name: kafka
+spec:
+  clusterIP: None
+  selector:
+    service: kafka
+  ports:
+    - name: internal-com-port
+      port: 29092
+      targetPort: 29092
+    - name: external-com-port
+      port: 30092
+      targetPort: 30092
