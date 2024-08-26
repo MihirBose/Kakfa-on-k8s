@@ -52,8 +52,10 @@ You can also install Kafdrop for monitoring the topics and messages you produce.
 1. Follow the install instructions on Kafdrop readme file-
    [Kafdrop](https://github.com/obsidiandynamics/kafdrop/tree/master?tab=readme-ov-file)
 2. If you choose to use HELM for installation, the following command should work - 
-`helm upgrade -i kafdrop chart --set image.tag=latest \
---set kafka.brokerConnect=kafka:29092 \
---set server.servlet.contextPath="/" \
---set jvm.opts="-Xms32M -Xmx64M"`
+   `helm upgrade -i kafdrop chart --set image.tag=latest \
+   --set kafka.brokerConnect=kafka:29092 \
+   --set server.servlet.contextPath="/" \
+   --set jvm.opts="-Xms32M -Xmx64M"`
 3. In the above command, the port in kafka.brokerConnect is set to 29092 as our kafka service is exposing that port for communications for k8s objects within the cluster. For any communcations outside the cluster or the docker daemon, the port 30092 is used.
+4. Since this service will be running on minikube, you will have to create a tunnel to expose it. Run the folllowing command in a new terminal tab and keep it open while you are using the service(replace namespace with the ns you deployed kafdrop in) - 
+   `minikube service kafdrop --url -n [namemspace]`
